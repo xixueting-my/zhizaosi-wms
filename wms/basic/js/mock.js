@@ -30,11 +30,11 @@ window.WMS_MOCK = (function () {
       { value: 0, label: "停用" },
     ],
     approvers: [
-      { value: "u1", label: "陆舟" },
-      { value: "u2", label: "蒋兵" },
-      { value: "u3", label: "许建伟" },
-      { value: "u4", label: "张荷虎" },
-      { value: "u5", label: "何宇麟" },
+      { value: "u1", label: "陆晚宁" },
+      { value: "u2", label: "蒋清禾" },
+      { value: "u3", label: "许知夏" },
+      { value: "u4", label: "张疏影" },
+      { value: "u5", label: "何晚晴" },
     ],
     regions: {
       浙江省: {
@@ -132,14 +132,14 @@ window.WMS_MOCK = (function () {
 
   let partialReasons = [
     { id: 1, reason_desc: "工厂少发", status: 1, updated_by: "Admin", updated_at: "2026-08-01 09:00:00" },
-    { id: 2, reason_desc: "物流破损剔除", status: 1, updated_by: "何宇麟", updated_at: "2026-08-12 14:20:00" },
-    { id: 3, reason_desc: "质检抽检暂扣", status: 0, updated_by: "张荷虎", updated_at: "2026-08-20 11:11:11" },
+    { id: 2, reason_desc: "物流破损剔除", status: 1, updated_by: "何晚晴", updated_at: "2026-08-12 14:20:00" },
+    { id: 3, reason_desc: "质检抽检暂扣", status: 0, updated_by: "张疏影", updated_at: "2026-08-20 11:11:11" },
   ];
 
   let qcReasons = [
     { id: 1, category_l1: "外观", category_l2: "破损、脏污", category_l3: "破损、污迹", updated_by: "Admin", updated_at: "2026-08-05 10:00:00" },
     { id: 2, category_l1: "外观", category_l2: "色差", category_l3: "严重色差", updated_by: "Admin", updated_at: "2026-08-05 10:05:00" },
-    { id: 3, category_l1: "功能", category_l2: "配件缺失", category_l3: "说明书缺失", updated_by: "何宇麟", updated_at: "2026-08-08 15:30:00" },
+    { id: 3, category_l1: "功能", category_l2: "配件缺失", category_l3: "说明书缺失", updated_by: "何晚晴", updated_at: "2026-08-08 15:30:00" },
   ];
 
   let siteZoneBindings = shops.map((s, i) => ({
@@ -153,9 +153,9 @@ window.WMS_MOCK = (function () {
   }));
 
   let putawayRules = [
-    { id: 1, rule_code: "YZGZ03", rule_name: "路线优先", status: 1, updated_by: "何宇麟", updated_at: "2026-03-26 09:37:11" },
-    { id: 2, rule_code: "YZGZ02", rule_name: "效率优先", status: 0, updated_by: "何宇麟", updated_at: "2026-03-26 09:37:11" },
-    { id: 3, rule_code: "YZGZ01", rule_name: "清库位优先", status: 0, updated_by: "何宇麟", updated_at: "2026-03-26 09:37:11" },
+    { id: 1, rule_code: "YZGZ03", rule_name: "路线优先", status: 1, updated_by: "何晚晴", updated_at: "2026-03-26 09:37:11" },
+    { id: 2, rule_code: "YZGZ02", rule_name: "效率优先", status: 0, updated_by: "何晚晴", updated_at: "2026-03-26 09:37:11" },
+    { id: 3, rule_code: "YZGZ01", rule_name: "清库位优先", status: 0, updated_by: "何晚晴", updated_at: "2026-03-26 09:37:11" },
   ];
 
   const putawayRuleDocs = [
@@ -180,18 +180,18 @@ window.WMS_MOCK = (function () {
   ];
 
   let waveRules = [
-    { id: 1, rule_code: "BCGZ03", rule_name: "18点波次", generate_time: "18:00", order_qty: 200, status: 0, updated_by: "张荷虎", updated_at: "2026-03-10 11:38:47" },
-    { id: 2, rule_code: "BCGZ02", rule_name: "14点波次", generate_time: "14:00", order_qty: 200, status: 0, updated_by: "张荷虎", updated_at: "2026-03-10 11:38:47" },
-    { id: 3, rule_code: "BCGZ01", rule_name: "9点波次", generate_time: "09:00", order_qty: 150, status: 1, updated_by: "张荷虎", updated_at: "2026-03-10 11:38:47" },
+    { id: 1, rule_code: "BCGZ03", rule_name: "18点波次", generate_time: "18:00", order_qty: 200, status: 0, updated_by: "张疏影", updated_at: "2026-03-10 11:38:47" },
+    { id: 2, rule_code: "BCGZ02", rule_name: "14点波次", generate_time: "14:00", order_qty: 200, status: 0, updated_by: "张疏影", updated_at: "2026-03-10 11:38:47" },
+    { id: 3, rule_code: "BCGZ01", rule_name: "9点波次", generate_time: "09:00", order_qty: 150, status: 1, updated_by: "张疏影", updated_at: "2026-03-10 11:38:47" },
   ];
 
   let allocateRules = [
-    { id: 1, rule_code: "PHGZ02", rule_name: "提升拣货效率", weight: 60, status: 0, updated_by: "张荷虎", updated_at: "2026-01-14 15:28:26" },
-    { id: 2, rule_code: "PHGZ01", rule_name: "缺货订单整理", weight: 50, status: 1, updated_by: "张荷虎", updated_at: "2026-01-14 15:28:26" },
+    { id: 1, rule_code: "PHGZ02", rule_name: "提升拣货效率", weight: 60, status: 0, updated_by: "张疏影", updated_at: "2026-01-14 15:28:26" },
+    { id: 2, rule_code: "PHGZ01", rule_name: "缺货订单整理", weight: 50, status: 1, updated_by: "张疏影", updated_at: "2026-01-14 15:28:26" },
   ];
 
   let allocateLogs = [
-    { at: "2026-01-14 15:28:26", who: "张荷虎", content: "新建 PHGZ01 缺货订单整理，权重 50，状态启用" },
+    { at: "2026-01-14 15:28:26", who: "张疏影", content: "新建 PHGZ01 缺货订单整理，权重 50，状态启用" },
   ];
 
   let seq = {
