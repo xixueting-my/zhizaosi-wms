@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>库存盘点 · WMS</title>
+  <link rel="stylesheet" href="../basic/css/wms.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="main">
+      <header class="topbar">
+        <div class="breadcrumb">
+          <span>库内管理</span><span class="sep">/</span><strong>库存盘点</strong>
+        </div>
+        <div class="topbar-user">
+          <div class="avatar" data-avatar></div>
+          <span data-current-user></span>
+        </div>
+      </header>
+      <div class="content">
+        <div class="page-header"><h1 class="page-title">库存盘点</h1></div>
+        <div class="surface">
+          <div class="sub-tabs card-tabs" id="view-tabs"></div>
+          <div class="sub-tabs card-tabs" id="status-tabs"></div>
+          <div class="list-sticky">
+            <div class="filter-bar">
+              <div class="filter-item"><label>盘点任务号</label><input id="q-no" /></div>
+              <div class="filter-item"><label>盘点类型</label>
+                <select id="q-type"><option value="">全部</option><option>普通盘点</option><option>缺货盘点</option></select>
+              </div>
+              <div class="filter-item"><label>来源单号</label><input id="q-src" /></div>
+              <div class="filter-item"><label>盘点人</label><input id="q-who" /></div>
+              <div class="filter-item">
+                <button type="button" class="btn btn-primary" id="btn-search">查询</button>
+                <button type="button" class="btn" id="btn-reset">重置</button>
+              </div>
+            </div>
+          </div>
+          <div class="list-panel">
+            <div class="action-bar" id="actions"></div>
+            <div class="table-wrap">
+              <table class="data">
+                <thead id="thead"></thead>
+                <tbody id="tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="drawer-mask" id="drawer-new">
+    <div class="drawer">
+      <div class="drawer-header">
+        <div><h3>新增盘点任务</h3><p>按库区或按 SKU 生成任务，再分配给盘点人。</p></div>
+        <button type="button" class="btn btn-ghost btn-icon" data-drawer-close aria-label="关闭">×</button>
+      </div>
+      <form id="form-new" style="display:flex;flex-direction:column;flex:1;min-height:0;">
+        <div class="drawer-body">
+          <div class="field"><label><span class="req">*</span>盘点类型</label>
+            <select name="type"><option>普通盘点</option><option>缺货盘点</option></select></div>
+          <div class="field"><label><span class="req">*</span>盘点方式</label>
+            <select name="method" id="f-method"><option value="zone">按库区盘点</option><option value="sku">按 SKU 盘点</option></select></div>
+          <div class="field" id="f-zone-wrap"><label><span class="req">*</span>库区</label><input name="zone" placeholder="例如 MD" /></div>
+          <div class="field" id="f-sku-wrap" hidden><label><span class="req">*</span>SKU</label><input name="sku" placeholder="例如 yours||FUZ1001||Black||S" /></div>
+          <div class="field"><label>来源单号</label><input name="source_no" placeholder="缺货盘点可填配货单号" /></div>
+          <div class="field"><label>备注</label><input name="remark" /></div>
+        </div>
+        <div class="drawer-footer">
+          <button type="button" class="btn" data-drawer-close>取消</button>
+          <button type="submit" class="btn btn-primary">确定</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="drawer-mask" id="drawer-detail">
+    <div class="drawer wide">
+      <div class="drawer-header">
+        <div><h3 id="detail-title">盘点明细</h3><p id="detail-sub"></p></div>
+        <button type="button" class="btn btn-ghost btn-icon" data-drawer-close aria-label="关闭">×</button>
+      </div>
+      <div class="drawer-body" id="detail-body"></div>
+    </div>
+  </div>
+
+  <script src="../basic/js/common.js"></script>
+  <script src="../basic/js/shell.js"></script>
+  <script src="../shared/js/org.js"></script>
+  <script src="../shared/js/sku.js"></script>
+  <script src="../shared/js/flow.js"></script>
+  <script src="../shared/js/ui.js"></script>
+  <script src="stocktake.js"></script>
+</body>
+</html>

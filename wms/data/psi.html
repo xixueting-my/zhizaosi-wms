@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>进销存 · WMS</title>
+  <link rel="stylesheet" href="../basic/css/wms.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="main">
+      <header class="topbar">
+        <div class="breadcrumb">
+          <span>数据中心</span><span class="sep">/</span><strong>进销存</strong>
+        </div>
+        <div class="topbar-user">
+          <div class="avatar" data-avatar></div>
+          <span data-current-user></span>
+        </div>
+      </header>
+      <div class="content">
+        <div class="page-header"><h1 class="page-title">进销存</h1></div>
+        <div class="surface">
+          <div class="list-sticky">
+            <div class="filter-bar">
+              <div class="filter-item"><label>日期</label><input id="q-date" type="date" value="2026-09-16" /></div>
+              <div class="filter-item"><label>SKU</label><input id="q-sku" /></div>
+              <div class="filter-item"><label>库区</label><select id="q-zone"><option value="">全部</option></select></div>
+              <div class="filter-item"><label>库位</label><select id="q-loc"><option value="">全部</option></select></div>
+              <div class="filter-item">
+                <button type="button" class="btn btn-primary" id="btn-search">搜索</button>
+                <button type="button" class="btn" id="btn-reset">重置</button>
+              </div>
+            </div>
+          </div>
+          <div class="list-panel">
+            <div class="action-bar">
+              <button type="button" class="btn" id="btn-refresh">刷新</button>
+              <span class="toolbar-meta" id="meta"></span>
+            </div>
+            <div class="table-wrap">
+              <table class="data">
+                <thead><tr>
+                  <th>图片</th><th>SKU</th><th>库区</th><th>库位</th>
+                  <th>期初库存</th><th>期初金额</th><th>本期入库</th><th>本期入库金额</th>
+                  <th>本期出库</th><th>本期出库金额</th><th>期末结存</th><th>期末金额</th><th>操作</th>
+                </tr></thead>
+                <tbody id="tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="drawer-mask" id="drawer-detail">
+    <div class="drawer wide">
+      <div class="drawer-header">
+        <div><h3 id="detail-title">当日流水</h3><p id="detail-sub"></p></div>
+        <button type="button" class="btn btn-ghost btn-icon" data-drawer-close aria-label="关闭">×</button>
+      </div>
+      <div class="drawer-body" id="detail-body"></div>
+    </div>
+  </div>
+  <script src="../basic/js/common.js"></script>
+  <script src="../basic/js/shell.js"></script>
+  <script src="../shared/js/org.js"></script>
+  <script src="../shared/js/sku.js"></script>
+  <script src="../shared/js/flow.js"></script>
+  <script src="../shared/js/ui.js"></script>
+  <script src="psi.js"></script>
+</body>
+</html>

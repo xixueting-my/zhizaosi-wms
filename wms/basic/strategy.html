@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>策略配置 · WMS</title>
+  <link rel="stylesheet" href="css/wms.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- 侧栏由 js/shell.js 按产品目录注入 -->
+<div class="main">
+      <header class="topbar">
+        <div class="breadcrumb">
+          <span>基础数据管理</span><span class="sep">/</span><strong>策略配置</strong>
+        </div>
+        <div class="topbar-user">
+          <div class="avatar" data-avatar></div>
+          <span data-current-user></span>
+        </div>
+      </header>
+
+      <div class="content" id="page-root">
+        <div class="page-header">
+          <h1 class="page-title">策略配置</h1>
+        </div>
+
+        <div class="surface">
+          <div class="tabs" role="tablist">
+            <button type="button" class="tab active" data-tab="putaway">预占规则</button>
+            <button type="button" class="tab" data-tab="wave">波次规则</button>
+            <button type="button" class="tab" data-tab="allocate">配货规则</button>
+          </div>
+
+                    <div class="tab-panel active" data-tab-panel="putaway">
+            <div class="list-sticky">
+              <div class="filter-bar">
+                <div class="filter-item">
+                  <label>规则编码</label>
+                  <div class="filter-control has-ico"><span class="field-ico" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><circle cx="7" cy="7" r="4.25"/><path d="m13 13-2.4-2.4"/></svg></span><input type="text" id="pa-code" placeholder="模糊搜索" /></div>
+                </div>
+                <div class="filter-item">
+                  <label>规则名称</label>
+                  <div class="filter-control has-ico"><span class="field-ico" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><circle cx="7" cy="7" r="4.25"/><path d="m13 13-2.4-2.4"/></svg></span><input type="text" id="pa-name" placeholder="模糊搜索" /></div>
+                </div>
+                <div class="filter-item">
+                  <button type="button" class="btn btn-primary" id="pa-search">查询</button>
+                  <button type="button" class="btn" id="pa-reset">重置</button>
+                </div>
+              </div>
+              <div class="sub-tabs" id="pa-status-tabs">
+                <button type="button" class="sub-tab active" data-pa-status="">全部</button>
+                <button type="button" class="sub-tab" data-pa-status="1">启用</button>
+                <button type="button" class="sub-tab" data-pa-status="0">停用</button>
+              </div>
+            </div>
+            <div class="list-panel">
+            <div class="action-bar" id="pa-actions">
+              <button type="button" class="btn btn-primary" id="pa-add">新增</button>
+              <span class="toolbar-meta" id="pa-meta"></span>
+            </div>
+            <div class="table-wrap">
+              <table class="data">
+                <thead>
+                  <tr>
+                    <th>操作</th>
+                    <th data-sort="rule_code">规则编码</th>
+                    <th data-sort="rule_name">规则名称</th>
+                    <th>状态</th>
+                    <th data-sort="updated_at">最后编辑</th>
+                  </tr>
+                </thead>
+                <tbody id="pa-tbody"></tbody>
+              </table>
+            </div>
+          </div><!-- /list-panel -->
+          </div>
+
+                    <div class="tab-panel" data-tab-panel="wave">
+            <div class="list-sticky">
+              <div class="filter-bar">
+                <div class="filter-item">
+                  <label>规则编码</label>
+                  <div class="filter-control has-ico"><span class="field-ico" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><circle cx="7" cy="7" r="4.25"/><path d="m13 13-2.4-2.4"/></svg></span><input type="text" id="wv-code" placeholder="模糊搜索" /></div>
+                </div>
+                <div class="filter-item">
+                  <label>规则名称</label>
+                  <div class="filter-control has-ico"><span class="field-ico" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><circle cx="7" cy="7" r="4.25"/><path d="m13 13-2.4-2.4"/></svg></span><input type="text" id="wv-name" placeholder="模糊搜索" /></div>
+                </div>
+                <div class="filter-item">
+                  <button type="button" class="btn btn-primary" id="wv-search">查询</button>
+                  <button type="button" class="btn" id="wv-reset">重置</button>
+                </div>
+              </div>
+              <div class="sub-tabs" id="wv-status-tabs">
+                <button type="button" class="sub-tab active" data-wv-status="">全部</button>
+                <button type="button" class="sub-tab" data-wv-status="1">启用</button>
+                <button type="button" class="sub-tab" data-wv-status="0">停用</button>
+              </div>
+            </div>
+            <p class="table-hint">勾选后可批量启用/停用 · 点击表头排序</p>
+            <div class="list-panel">
+            <div class="action-bar" id="wv-actions">
+              <button type="button" class="btn btn-primary" id="wv-add">新增波次规则</button>
+              <button type="button" class="btn btn-icon" id="wv-refresh" title="刷新" aria-label="刷新"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M13.25 8A5.25 5.25 0 1 1 11.4 3.55"/><path d="M13.25 2.75v3h-3"/></svg></button>
+              <span class="batch">
+                <span class="sel-count" id="wv-sel-count"></span>
+                <button type="button" class="btn btn-success-soft" id="wv-enable">启用</button>
+                <button type="button" class="btn btn-danger-soft" id="wv-disable">停用</button>
+              </span>
+              <span class="toolbar-meta" id="wv-meta"></span>
+            </div>
+            <div class="table-wrap">
+              <table class="data">
+                <thead>
+                  <tr>
+                    <th><input type="checkbox" id="wv-check-all" /></th>
+                    <th>操作</th>
+                    <th data-sort="rule_code">规则编码</th>
+                    <th data-sort="rule_name">规则名称</th>
+                    <th data-sort="generate_time">生成时间</th>
+                    <th>单量</th>
+                    <th>状态</th>
+                    <th>最后编辑</th>
+                  </tr>
+                </thead>
+                <tbody id="wv-tbody"></tbody>
+              </table>
+            </div>
+          
+          </div><!-- /list-panel --></div>
+
+                    <div class="tab-panel" data-tab-panel="allocate">
+            <div class="list-sticky">
+              <div class="filter-bar">
+                <div class="filter-item">
+                  <label>规则编码</label>
+                  <div class="filter-control has-ico"><span class="field-ico" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><circle cx="7" cy="7" r="4.25"/><path d="m13 13-2.4-2.4"/></svg></span><input type="text" id="al-code" placeholder="模糊搜索" /></div>
+                </div>
+                <div class="filter-item">
+                  <label>规则名称</label>
+                  <div class="filter-control has-ico"><span class="field-ico" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><circle cx="7" cy="7" r="4.25"/><path d="m13 13-2.4-2.4"/></svg></span><input type="text" id="al-name" placeholder="模糊搜索" /></div>
+                </div>
+                <div class="filter-item">
+                  <button type="button" class="btn btn-primary" id="al-search">查询</button>
+                  <button type="button" class="btn" id="al-reset">重置</button>
+                </div>
+              </div>
+              <div class="sub-tabs" id="al-status-tabs">
+                <button type="button" class="sub-tab active" data-al-status="">全部</button>
+                <button type="button" class="sub-tab" data-al-status="1">启用</button>
+                <button type="button" class="sub-tab" data-al-status="0">停用</button>
+              </div>
+            </div>
+            <div class="list-panel">
+            <div class="action-bar" id="al-actions">
+              <button type="button" class="btn btn-primary" id="al-edit">编辑配货规则</button>
+              <button type="button" class="btn" id="al-log">操作日志</button>
+              <span class="toolbar-meta" id="al-meta"></span>
+            </div>
+            <div class="table-wrap">
+              <table class="data">
+                <thead>
+                  <tr>
+                    <th>操作</th>
+                    <th data-sort="rule_code">规则编码</th>
+                    <th data-sort="rule_name">规则名称</th>
+                    <th data-sort="weight">权重</th>
+                    <th>状态</th>
+                    <th>最后编辑</th>
+                  </tr>
+                </thead>
+                <tbody id="al-tbody"></tbody>
+              </table>
+            </div>
+          
+          </div><!-- /list-panel --></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="drawer-mask" id="drawer-wv">
+    <div class="drawer">
+      <div class="drawer-header">
+        <div>
+          <h3 id="drawer-wv-title">新增波次规则</h3>
+          <p>到点按单量阈值自动生成波次（逻辑后续对接出库）。</p>
+        </div>
+        <button type="button" class="btn btn-ghost btn-icon" data-drawer-close>×</button>
+      </div>
+      <form id="form-wv" style="display:flex;flex-direction:column;flex:1;min-height:0;">
+        <div class="drawer-body">
+          <input type="hidden" name="id" />
+          <div class="field">
+            <label>规则编码</label>
+            <input type="text" name="rule_code" readonly />
+            <div class="hint">新增时自动生成，创建后不可改。</div>
+          </div>
+          <div class="field">
+            <label><span class="req">*</span>规则名称</label>
+            <input type="text" name="rule_name" maxlength="100" placeholder="例如 18点波次" />
+            <div class="error"></div>
+          </div>
+          <div class="field">
+            <label><span class="req">*</span>生成时间</label>
+            <input type="time" name="generate_time" />
+            <div class="error"></div>
+          </div>
+          <div class="field">
+            <label><span class="req">*</span>单量</label>
+            <input type="number" name="order_qty" min="1" step="1" />
+            <div class="hint">达到该订单量阈值时触发波次。</div>
+            <div class="error"></div>
+          </div>
+        </div>
+        <div class="drawer-footer">
+          <button type="button" class="btn" data-drawer-close>取消</button>
+          <button type="submit" class="btn btn-primary">保存</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="drawer-mask" id="drawer-al">
+    <div class="drawer">
+      <div class="drawer-header">
+        <div>
+          <h3>编辑配货规则</h3>
+          <p>权重越高，配货排序时优先级越高。</p>
+        </div>
+        <button type="button" class="btn btn-ghost btn-icon" data-drawer-close>×</button>
+      </div>
+      <form id="form-al" style="display:flex;flex-direction:column;flex:1;min-height:0;">
+        <div class="drawer-body">
+          <input type="hidden" name="id" />
+          <div class="field">
+            <label>规则编码</label>
+            <input type="text" name="rule_code" readonly />
+          </div>
+          <div class="field">
+            <label><span class="req">*</span>规则名称</label>
+            <input type="text" name="rule_name" maxlength="100" />
+            <div class="error"></div>
+          </div>
+          <div class="field">
+            <label><span class="req">*</span>权重</label>
+            <input type="number" name="weight" min="0" step="1" />
+            <div class="error"></div>
+          </div>
+        </div>
+        <div class="drawer-footer">
+          <button type="button" class="btn" data-drawer-close>取消</button>
+          <button type="submit" class="btn btn-primary">保存</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="drawer-mask" id="drawer-pa">
+    <div class="drawer">
+      <div class="drawer-header">
+        <div>
+          <h3 id="drawer-pa-title">新增预占规则</h3>
+          <p>同一时间只启用一条。说明从规则名称旁的帮助查看。</p>
+        </div>
+        <button type="button" class="btn btn-ghost btn-icon" data-drawer-close>×</button>
+      </div>
+      <form id="form-pa" style="display:flex;flex-direction:column;flex:1;min-height:0;">
+        <div class="drawer-body">
+          <input type="hidden" name="id" />
+          <div class="field">
+            <label>规则编码</label>
+            <input type="text" name="rule_code" readonly />
+            <div class="hint">新增时自动生成，创建后不可改。</div>
+          </div>
+          <div class="field">
+            <label><span class="req">*</span>规则名称</label>
+            <input type="text" name="rule_name" maxlength="100" />
+            <div class="error"></div>
+          </div>
+        </div>
+        <div class="drawer-footer">
+          <button type="button" class="btn" data-drawer-close>取消</button>
+          <button type="submit" class="btn btn-primary">保存</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-mask" id="modal-al-log">
+    <div class="modal" role="dialog" aria-labelledby="al-log-title">
+      <div class="modal-header">
+        <h3 id="al-log-title">配货规则操作日志</h3>
+        <button type="button" class="btn btn-ghost btn-icon" data-modal-close aria-label="关闭">×</button>
+      </div>
+      <div class="modal-body">
+        <table class="data">
+          <thead><tr><th>时间</th><th>人</th><th>内容</th></tr></thead>
+          <tbody id="al-log-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="help-pop" id="help-pop" hidden></div>
+
+  <script src="../shared/js/org.js"></script>
+  <script src="js/mock.js"></script>
+  <script src="js/shell.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/strategy.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>操作记录 · WMS</title>
+  <link rel="stylesheet" href="../basic/css/wms.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="main">
+      <header class="topbar">
+        <div class="breadcrumb">
+          <span>库内管理</span><span class="sep">/</span><strong>操作记录</strong>
+        </div>
+        <div class="topbar-user">
+          <div class="avatar" data-avatar></div>
+          <span data-current-user></span>
+        </div>
+      </header>
+      <div class="content">
+        <div class="page-header"><h1 class="page-title">操作记录</h1></div>
+        <div class="surface">
+          <div class="list-sticky">
+            <div class="filter-bar">
+              <div class="filter-item"><label>SKU</label><input id="q-sku" /></div>
+              <div class="filter-item"><label>操作</label>
+                <select id="q-op"><option value="">全部</option><option>PDA上架</option><option>PDA配货</option><option>移位上架</option><option>调拨发货</option><option>调拨配货</option></select>
+              </div>
+              <div class="filter-item"><label>来源单号</label><input id="q-no" /></div>
+              <div class="filter-item">
+                <button type="button" class="btn btn-primary" id="btn-search">查询</button>
+                <button type="button" class="btn" id="btn-reset">重置</button>
+              </div>
+            </div>
+          </div>
+          <div class="list-panel">
+            <div class="action-bar" id="actions"></div>
+            <div class="table-wrap">
+              <table class="data">
+                <thead><tr>
+                  <th>SKU</th><th>SKC</th><th>SPU</th><th>变更数量</th><th>仓库</th>
+                  <th>原库区</th><th>原库位</th><th>新库区</th><th>新库位</th><th>操作</th><th>来源单号</th><th>操作时间</th>
+                </tr></thead>
+                <tbody id="tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../basic/js/common.js"></script>
+  <script src="../basic/js/shell.js"></script>
+  <script src="../shared/js/org.js"></script>
+  <script src="../shared/js/sku.js"></script>
+  <script src="../shared/js/flow.js"></script>
+  <script src="../shared/js/ui.js"></script>
+  <script src="oplog.js"></script>
+</body>
+</html>

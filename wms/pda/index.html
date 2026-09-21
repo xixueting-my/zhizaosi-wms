@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <title>织造司 PDA</title>
+  <link rel="stylesheet" href="css/pda.css?v=20260921j" />
+</head>
+<body>
+  <div class="device">
+    <div class="device-screen">
+      <div class="os-status">
+        <span id="osTime">09:41</span>
+        <span class="os-notch" aria-hidden="true"></span>
+        <span class="os-sig" aria-hidden="true">
+          <span class="os-signal"></span>
+          <span class="os-wifi"></span>
+          <span class="os-bat"><i></i></span>
+        </span>
+      </div>
+      <div id="app"></div>
+      <nav class="os-nav" aria-label="系统操作栏">
+        <button type="button" id="osBack" aria-label="返回">‹</button>
+        <button type="button" id="osHome" aria-label="主页">○</button>
+        <button type="button" id="osRecent" aria-label="最近任务">□</button>
+      </nav>
+      <div class="toast-wrap" id="toasts"></div>
+    </div>
+  </div>
+  <script src="../shared/js/config.js?v=20260921c"></script>
+  <script src="../shared/js/org.js?v=20260921c"></script>
+  <script src="../shared/js/sku.js?v=20260921c"></script>
+  <script src="../shared/js/flow.js?v=20260921c"></script>
+  <script src="../shared/js/api.js?v=20260921c"></script>
+  <script src="js/app.js?v=20260921k"></script>
+</body>
+</html>

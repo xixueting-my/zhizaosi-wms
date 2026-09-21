@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>仓库管理 · WMS</title>
+  <link rel="stylesheet" href="css/wms.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- 侧栏由 js/shell.js 按产品目录注入 -->
+<div class="main">
+      <header class="topbar">
+        <div class="breadcrumb">
+          <span>基础数据管理</span><span class="sep">/</span><strong>仓库管理</strong>
+        </div>
+        <div class="topbar-user">
+          <div class="avatar" data-avatar></div>
+          <span data-current-user></span>
+        </div>
+      </header>
+
+      <div class="content" id="page-root">
+        <div class="page-header">
+          <h1 class="page-title">仓库管理</h1>
+        </div>
+
+        <div class="surface">
+          <div class="tabs" role="tablist">
+            <button type="button" class="tab active" data-tab="warehouse" role="tab">仓库</button>
+            <button type="button" class="tab" data-tab="zone" role="tab">库区</button>
+            <button type="button" class="tab" data-tab="location" role="tab">库位</button>
+          </div>
+
+          <!-- 仓库 -->
+                    <div class="tab-panel active" data-tab-panel="warehouse" role="tabpanel">
+            <div class="list-sticky">
+              <div class="filter-bar">
+                <div class="filter-item">
+                  <label>仓库编码</label>
+                  <div class="filter-control has-ico"><span class="field-ico" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><circle cx="7" cy="7" r="4.25"/><path d="m13 13-2.4-2.4"/></svg></span><input type="text" id="wh-code" placeholder="仓库编码" /></div>
+                </div>
+                <div class="filter-item">
+                  <label>仓库名称</label>
+                  <div class="filter-control has-ico"><span class="field-ico" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><circle cx="7" cy="7" r="4.25"/><path d="m13 13-2.4-2.4"/></svg></span><input type="text" id="wh-name" placeholder="仓库名称" /></div>
+                </div>
+                <div class="filter-item">
+                  <button type="button" class="btn btn-primary" id="wh-search">查询</button>
+                  <button type="button" class="btn" id="wh-reset">重置</button>
+                </div>
+              </div>
+            </div>
+            <p class="table-hint" id="wh-hint">点击表头排序 · 行内「更多」可跳转库区</p>
+            <div class="list-panel">
+            <div class="action-bar" id="wh-actions">
+              <button type="button" class="btn btn-primary" id="wh-add">新建仓库</button>
+              <button type="button" class="btn btn-icon" id="wh-refresh" title="刷新" aria-label="刷新"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M13.25 8A5.25 5.25 0 1 1 11.4 3.55"/><path d="M13.25 2.75v3h-3"/></svg></button>
+              <span class="toolbar-meta" id="wh-meta"></span>
+            </div>
+            <div class="table-wrap">
+              <table class="data">
+                <thead>
+                  <tr>
+                    <th data-sort="warehouse_code">仓库编码</th>
+                    <th data-sort="warehouse_name">仓库名称</th>
+                    <th>所在地区</th>
+                    <th>联系人</th>
+                    <th>操作</th>
+                    <th data-sort="updated_at">最后编辑</th>
+                  </tr>
+                </thead>
+                <tbody id="wh-tbody"></tbody>
+              </table>
+            </div>
+            <div class="pagination" id="wh-page"></div>
+          </div><!-- /list-panel -->
+          </div>
+
+          <!-- 库区 -->
+                    <div class="tab-panel" data-tab-panel="zone" role="tabpanel">
+            <div class="list-sticky">
+              <div class="filter-bar">
+                <div class="filter-item">
+                  <label>库区编码</label>
+                  <div class="filter-control has-ico"><span class="field-ico" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><circle cx="7" cy="7" r="4.25"/><path d="m13 13-2.4-2.4"/></svg></span><input type="text" id="zn-code" placeholder="库区编码" /></div>
+                </div>
+                <div class="filter-item">
+                  <label>库区名称</label>
+                  <div class="filter-control has-ico"><span class="field-ico" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><circle cx="7" cy="7" r="4.25"/><path d="m13 13-2.4-2.4"/></svg></span><input type="text" id="zn-name" placeholder="库区名称" /></div>
+                </div>
+                <div class="filter-item">
+                  <label>所属仓库</label>
+                  <select id="zn-wh"></select>
+                </div>
+                <div class="filter-item">
+                  <label>所属站点</label>
+                  <select id="zn-site"></select>
+                </div>
+                <div class="filter-item">
+                  <label>库区类型</label>
+                  <select id="zn-type"></select>
+                </div>
+                <div class="filter-item">
+                  <button type="button" class="btn btn-primary" id="zn-search">查询</button>
+                  <button type="button" class="btn" id="zn-reset">重置</button>
+                </div>
+              </div>
+            </div>
+            <p class="table-hint" id="zn-hint">点击表头排序 · 行内「更多」可跳转库位</p>
+            <div class="list-panel">
+            <div class="action-bar" id="zn-actions">
+              <button type="button" class="btn btn-primary" id="zn-add">新建库区</button>
+              <button type="button" class="btn btn-icon" id="zn-refresh" title="刷新" aria-label="刷新"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M13.25 8A5.25 5.25 0 1 1 11.4 3.55"/><path d="M13.25 2.75v3h-3"/></svg></button>
+              <span class="toolbar-meta" id="zn-meta"></span>
+            </div>
+            <div class="table-wrap">
+              <table class="data">
+                <thead>
+                  <tr>
+                    <th data-sort="zone_code">库区编码</th>
+                    <th data-sort="zone_name">库区名称</th>
+                    <th>所属仓库</th>
+                    <th>所属站点</th>
+                    <th>库区类型</th>
+                    <th>操作</th>
+                    <th data-sort="updated_at">最后编辑</th>
+                  </tr>
+                </thead>
+                <tbody id="zn-tbody"></tbody>
+              </table>
+            </div>
+            <div class="pagination" id="zn-page"></div>
+          </div><!-- /list-panel -->
+          </div>
+
+          <!-- 库位 -->
+                    <div class="tab-panel" data-tab-panel="location" role="tabpanel">
+            <div class="list-sticky">
+              <div class="filter-bar">
+                <div class="filter-item">
+                  <label>库位编码</label>
+                  <div class="filter-control has-ico"><span class="field-ico" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><circle cx="7" cy="7" r="4.25"/><path d="m13 13-2.4-2.4"/></svg></span><input type="text" id="loc-code" placeholder="库位编码" /></div>
+                </div>
+                <div class="filter-item">
+                  <label>所属仓库</label>
+                  <select id="loc-wh"></select>
+                </div>
+                <div class="filter-item">
+                  <label>所属库区</label>
+                  <select id="loc-zone"></select>
+                </div>
+                <div class="filter-item">
+                  <label>所属站点</label>
+                  <select id="loc-site"></select>
+                </div>
+                <div class="filter-item">
+                  <label>是否空库位</label>
+                  <select id="loc-empty"></select>
+                </div>
+                <div class="filter-item">
+                  <button type="button" class="btn btn-primary" id="loc-search">查询</button>
+                  <button type="button" class="btn" id="loc-reset">重置</button>
+                </div>
+              </div>
+              <div class="sub-tabs" id="loc-status-tabs">
+                <button type="button" class="sub-tab active" data-loc-status="">全部</button>
+                <button type="button" class="sub-tab" data-loc-status="1">正常</button>
+                <button type="button" class="sub-tab" data-loc-status="0">停用</button>
+              </div>
+            </div>
+            <p class="table-hint" id="loc-hint">点击表头排序 · 勾选后可批量启用/停用</p>
+            <div class="list-panel">
+            <div class="action-bar" id="loc-actions">
+              <button type="button" class="btn btn-primary" id="loc-add">新建库位</button>
+              <button type="button" class="btn btn-icon" id="loc-refresh" title="刷新" aria-label="刷新"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M13.25 8A5.25 5.25 0 1 1 11.4 3.55"/><path d="M13.25 2.75v3h-3"/></svg></button>
+              <div class="menu" id="loc-more-menu">
+                <button type="button" class="btn" data-menu-trigger>更多 <svg class="ico-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.25"><path d="M2.75 4.5 6 7.75 9.25 4.5"/></svg></button>
+                <div class="menu-panel">
+                  <button type="button" class="menu-item" id="loc-print">打印库位码</button>
+                  <button type="button" class="menu-item" id="loc-import">导入库位</button>
+                  <button type="button" class="menu-item" id="loc-tpl">下载导入模板</button>
+                </div>
+              </div>
+              <span class="batch">
+                <span class="sel-count" id="loc-sel-count"></span>
+                <button type="button" class="btn btn-success-soft" id="loc-enable">启用</button>
+                <button type="button" class="btn btn-danger-soft" id="loc-disable">停用</button>
+              </span>
+              <span class="toolbar-meta" id="loc-meta"></span>
+            </div>
+            <div class="table-wrap">
+              <table class="data">
+                <thead>
+                  <tr>
+                    <th><input type="checkbox" id="loc-check-all" /></th>
+                    <th data-sort="location_code">库位编码</th>
+                    <th>所属仓库</th>
+                    <th>所属库区</th>
+                    <th>所属站点</th>
+                    <th data-sort="pick_priority">拣货优先级</th>
+                    <th>SKU上限</th>
+                    <th>空库位</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                    <th data-sort="updated_at">最后编辑</th>
+                  </tr>
+                </thead>
+                <tbody id="loc-tbody"></tbody>
+              </table>
+            </div>
+            <div class="pagination" id="loc-page"></div>
+          </div><!-- /list-panel -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 仓库抽屉 -->
+  <div class="drawer-mask" id="drawer-wh">
+    <div class="drawer">
+      <div class="drawer-header">
+        <div>
+          <h3 id="drawer-wh-title">新建仓库</h3>
+          <p>编码创建后不可修改，请按企业编码规范填写。</p>
+        </div>
+        <button type="button" class="btn btn-ghost btn-icon" data-drawer-close aria-label="关闭">×</button>
+      </div>
+      <form id="form-wh" style="display:flex;flex-direction:column;flex:1;min-height:0;">
+        <div class="drawer-body">
+          <input type="hidden" name="id" />
+          <div class="field">
+            <label><span class="req">*</span>仓库编码</label>
+            <input type="text" name="warehouse_code" maxlength="50" placeholder="例如 WH-HZ-01" />
+            <div class="error"></div>
+          </div>
+          <div class="field">
+            <label><span class="req">*</span>仓库名称</label>
+            <input type="text" name="warehouse_name" maxlength="50" placeholder="例如 杭州一号仓" />
+            <div class="error"></div>
+          </div>
+          <div class="field">
+            <label>所在地区</label>
+            <div class="field-row">
+              <select name="province" id="wh-province"></select>
+              <select name="city" id="wh-city"></select>
+              <select name="district" id="wh-district"></select>
+            </div>
+          </div>
+          <div class="field">
+            <label>详细地址</label>
+            <input type="text" name="address" maxlength="200" />
+          </div>
+          <div class="field">
+            <label>邮政编码</label>
+            <input type="text" name="postal_code" maxlength="20" />
+            <div class="hint">根据地区、地址自动填写。能识别到街道时用更细的邮编，仍可手改。</div>
+          </div>
+          <div class="field">
+            <label>联系人</label>
+            <input type="text" name="contact_name" maxlength="50" />
+          </div>
+          <div class="field">
+            <label>联系电话</label>
+            <input type="text" name="contact_phone" maxlength="30" />
+          </div>
+          <div class="field">
+            <label>备注</label>
+            <textarea name="remark" maxlength="500"></textarea>
+          </div>
+        </div>
+        <div class="drawer-footer">
+          <button type="button" class="btn" data-drawer-close>取消</button>
+          <button type="submit" class="btn btn-primary">保存</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 库区抽屉 -->
+  <div class="drawer-mask" id="drawer-zn">
+    <div class="drawer">
+      <div class="drawer-header">
+        <div>
+          <h3 id="drawer-zn-title">新建库区</h3>
+          <p>库区必须归属仓库；全仓共享库区可不选站点。</p>
+        </div>
+        <button type="button" class="btn btn-ghost btn-icon" data-drawer-close aria-label="关闭">×</button>
+      </div>
+      <form id="form-zn" style="display:flex;flex-direction:column;flex:1;min-height:0;">
+        <div class="drawer-body">
+          <input type="hidden" name="id" />
+          <div class="field">
+            <label><span class="req">*</span>库区编码</label>
+            <input type="text" name="zone_code" maxlength="50" />
+            <div class="error"></div>
+          </div>
+          <div class="field">
+            <label><span class="req">*</span>库区名称</label>
+            <input type="text" name="zone_name" maxlength="50" />
+            <div class="error"></div>
+          </div>
+          <div class="field">
+            <label><span class="req">*</span>所属仓库</label>
+            <select name="warehouse_id"></select>
+            <div class="error"></div>
+          </div>
+          <div class="field">
+            <label><span class="req">*</span>库区类型</label>
+            <select name="zone_type"></select>
+            <div class="error"></div>
+          </div>
+          <div class="field">
+            <label>所属站点</label>
+            <select name="site_id"></select>
+            <div class="hint">全仓共享库区可不选站点。</div>
+          </div>
+        </div>
+        <div class="drawer-footer">
+          <button type="button" class="btn" data-drawer-close>取消</button>
+          <button type="submit" class="btn btn-primary">保存</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 库位抽屉 -->
+  <div class="drawer-mask" id="drawer-loc">
+    <div class="drawer">
+      <div class="drawer-header">
+        <div>
+          <h3 id="drawer-loc-title">新建库位</h3>
+          <p>库位挂在库区下；选择库区后自动带出仓库与站点。</p>
+        </div>
+        <button type="button" class="btn btn-ghost btn-icon" data-drawer-close aria-label="关闭">×</button>
+      </div>
+      <form id="form-loc" style="display:flex;flex-direction:column;flex:1;min-height:0;">
+        <div class="drawer-body">
+          <input type="hidden" name="id" />
+          <div class="field">
+            <label><span class="req">*</span>库位编码</label>
+            <input type="text" name="location_code" maxlength="50" placeholder="例如 A-01-01" />
+            <div class="error"></div>
+          </div>
+          <div class="field">
+            <label><span class="req">*</span>所属库区</label>
+            <select name="zone_id"></select>
+            <div class="hint" id="loc-zone-hint">选择库区后自动带出所属仓库 / 站点</div>
+            <div class="error"></div>
+          </div>
+          <div class="field">
+            <label><span class="req">*</span>拣货优先级</label>
+            <input type="number" name="pick_priority" min="0" step="0.01" placeholder="≥ 0，最多 2 位小数" />
+            <div class="hint">数字越大，拣货路径中越优先展示（可按货架动线编排）。</div>
+            <div class="error"></div>
+          </div>
+          <div class="field">
+            <label>SKU 数量上限</label>
+            <input type="number" name="sku_qty_limit" min="0" step="1" placeholder="0 表示不限制" />
+            <div class="hint">限制该库位可混放的 SKU 种类数；0 为不限制。</div>
+          </div>
+        </div>
+        <div class="drawer-footer">
+          <button type="button" class="btn" data-drawer-close>取消</button>
+          <button type="submit" class="btn btn-primary">保存</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/region.js"></script>
+  <script src="../shared/js/org.js"></script>
+  <script src="js/mock.js"></script>
+  <script src="js/shell.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/warehouse.js"></script>
+</body>
+</html>

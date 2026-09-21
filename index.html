@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>织造司 WMS</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: #f2f3f7;
+      color: #333;
+    }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 48px 20px; }
+    h1 { font-size: 28px; margin: 0 0 8px; }
+    p { color: #666; line-height: 1.6; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
+    a.card {
+      display: block; background: #fff; border-radius: 12px; padding: 22px 20px;
+      text-decoration: none; color: inherit; border: 1px solid #e8e8e8;
+    }
+    a.card strong { display: block; font-size: 18px; margin-bottom: 6px; color: #006de6; }
+    a.card span { font-size: 13px; color: #666; line-height: 1.5; }
+    .note { margin-top: 22px; font-size: 13px; background: #fff; border-radius: 8px; padding: 12px 14px; line-height: 1.6; }
+    @media (max-width: 640px) { .row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>织造司 WMS</h1>
+    <p>同一浏览器里打开下面两个入口。收货、质检、上架、配货、复核写的是同一份演示数据。</p>
+    <div class="row">
+      <a class="card" href="wms/pda/index.html">
+        <strong>PDA</strong>
+        <span>手持作业。账号 pda，密码 pda123。登录后选择杭州一号仓。</span>
+      </a>
+      <a class="card" href="wms/inbound/receiving.html">
+        <strong>WMS 后台</strong>
+        <span>从收货单进入。左侧可切换入库、出库、库内和库存。</span>
+      </a>
+    </div>
+    <div class="note">演示数据存在这台浏览器里。换一台设备会从初始数据重新开始。单据页上的「重置演示数据」可以回到起点。</div>
+  </div>
+</body>
+</html>

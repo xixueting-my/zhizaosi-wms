@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>库存明细查询 · WMS</title>
+  <link rel="stylesheet" href="../basic/css/wms.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="main">
+      <header class="topbar">
+        <div class="breadcrumb">
+          <span>数据中心</span><span class="sep">/</span><strong>库存明细查询</strong>
+        </div>
+        <div class="topbar-user">
+          <div class="avatar" data-avatar></div>
+          <span data-current-user></span>
+        </div>
+      </header>
+      <div class="content">
+        <div class="page-header"><h1 class="page-title">库存明细查询</h1></div>
+        <div class="surface">
+          <div class="list-sticky">
+            <div class="filter-bar">
+              <div class="filter-item"><label>sku</label><input id="q-sku" /></div>
+              <div class="filter-item"><label>skc</label><input id="q-skc" /></div>
+              <div class="filter-item"><label>spu</label><input id="q-spu" /></div>
+              <div class="filter-item"><label>仓库</label>
+                <select id="q-wh"><option value="">全部</option></select>
+              </div>
+              <div class="filter-item"><label>库区</label><select id="q-zone"><option value="">全部</option></select></div>
+              <div class="filter-item"><label>库位</label><select id="q-loc"><option value="">全部</option></select></div>
+              <div class="filter-item"><label>数量筛选</label>
+                <select id="q-qty">
+                  <option value="">全部</option>
+                  <option value="total">总数量 &gt; 0</option>
+                  <option value="wait_putaway">待上架 &gt; 0</option>
+                  <option value="bin_qty">仓位库存 &gt; 0</option>
+                  <option value="reserved">预占 &gt; 0</option>
+                  <option value="wait_ship">待发货 &gt; 0</option>
+                </select>
+              </div>
+              <div class="filter-item"><label>显示空库存记录</label>
+                <select id="q-empty"><option value="">否</option><option value="1">是</option></select>
+              </div>
+              <div class="filter-item">
+                <button type="button" class="btn btn-primary" id="btn-search">搜索</button>
+                <button type="button" class="btn" id="btn-reset">重置</button>
+              </div>
+            </div>
+          </div>
+          <div class="list-panel">
+            <div class="action-bar" id="actions">
+              <button type="button" class="btn btn-primary" id="btn-refresh">刷新</button>
+              <button type="button" class="btn" id="btn-import">导入库位库存</button>
+              <button type="button" class="btn" id="btn-export">导出</button>
+              <button type="button" class="btn" id="btn-hist">导出历史</button>
+              <input type="file" id="file-import" accept=".csv,text/csv" hidden />
+              <span class="toolbar-meta" id="meta"></span>
+            </div>
+            <div class="table-wrap">
+              <table class="data">
+                <thead><tr>
+                  <th>sku</th><th>skc</th><th>spu</th><th>图片</th>
+                  <th>总数量</th><th>待上架数量</th><th>仓位库存数量</th><th>预占数量</th><th>待发货数量</th>
+                  <th>仓库</th><th>库区</th><th>库位</th><th>成本价</th>
+                </tr></thead>
+                <tbody id="tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="drawer-mask" id="drawer-hist">
+    <div class="drawer">
+      <div class="drawer-header">
+        <div><h3>导出历史</h3><p>仅保留本次浏览器会话</p></div>
+        <button type="button" class="btn btn-ghost btn-icon" data-drawer-close aria-label="关闭">×</button>
+      </div>
+      <div class="drawer-body" id="hist-body"></div>
+    </div>
+  </div>
+  <script src="../basic/js/common.js"></script>
+  <script src="../basic/js/shell.js"></script>
+  <script src="../shared/js/org.js"></script>
+  <script src="../shared/js/sku.js"></script>
+  <script src="../shared/js/flow.js"></script>
+  <script src="../shared/js/ui.js"></script>
+  <script src="inventory.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>配货单 · WMS</title>
+  <link rel="stylesheet" href="../basic/css/wms.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="main">
+      <header class="topbar">
+        <div class="breadcrumb">
+          <span>出库管理</span><span class="sep">/</span><strong>配货单</strong>
+        </div>
+        <div class="topbar-user">
+          <div class="avatar" data-avatar></div>
+          <span data-current-user></span>
+        </div>
+      </header>
+      <div class="content">
+        <div class="page-header"><h1 class="page-title">配货单</h1></div>
+        <div class="surface">
+          <div class="sub-tabs card-tabs" id="status-tabs"></div>
+          <div class="list-sticky">
+            <div class="filter-bar">
+              <div class="filter-item"><label>单号</label><input id="q" placeholder="配货单 / 波次 / SKU" /></div>
+              <div class="filter-item">
+                <button type="button" class="btn btn-primary" id="btn-search">查询</button>
+                <button type="button" class="btn" id="btn-reset">重置</button>
+              </div>
+            </div>
+          </div>
+          <div class="list-panel">
+            <div class="action-bar" id="actions"></div>
+            <div class="table-wrap">
+              <table class="data">
+                <thead><tr><th></th><th>配货单号</th><th>波次号</th><th>类型</th><th>SKU</th><th>数量</th><th>仓库</th><th>状态</th><th>配货员</th><th>操作</th></tr></thead>
+                <tbody id="tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../basic/js/common.js"></script>
+  <script src="../basic/js/shell.js"></script>
+  <script src="../shared/js/org.js"></script>
+  <script src="../shared/js/sku.js"></script>
+  <script src="../shared/js/flow.js"></script>
+  <script src="../shared/js/ui.js"></script>
+  <script src="picks.js"></script>
+</body>
+</html>
